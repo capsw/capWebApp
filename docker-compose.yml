@@ -1,0 +1,8 @@
+version: '3'
+
+services:
+  capwebapp:
+    image: capwebapp
+    build:
+      context: .
+      dockerfile: capWebApp/Dockerfile
