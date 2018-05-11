@@ -15,6 +15,12 @@ namespace capWebApp.Controllers
             return View();
         }
 
+        public IActionResult HowTo()
+        {
+            return View();
+        }
+
+
         public IActionResult About()
         {
             ViewData["Message"] = "Your application description page.";
