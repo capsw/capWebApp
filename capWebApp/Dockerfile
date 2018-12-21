@@ -1,14 +1,15 @@
-FROM microsoft/aspnetcore:2.0 AS base
+FROM microsoft/dotnet:2.2-aspnetcore-runtime AS base
 WORKDIR /app
 EXPOSE 80
+EXPOSE 443
 
-FROM microsoft/aspnetcore-build:2.0 AS build
+FROM microsoft/dotnet:2.2-sdk AS build
 WORKDIR /src
-COPY capWebApp.sln ./
-COPY capWebApp/capWebApp.csproj capWebApp/
-RUN dotnet restore -nowarn:msb3202,nu1503
+#COPY capWebApp.sln ./
+COPY ["capWebApp/capWebApp.csproj", "capWebApp/"]
+RUN dotnet restore "capWebApp/capWebApp.csproj"
 COPY . .
-WORKDIR /src/capWebApp
+WORKDIR "/src/capWebApp"
 RUN dotnet build -c Release -o /app
 
 FROM build AS publish
